@@ -1,0 +1,23 @@
+<h2>Admin Dashboard</h2>
+
+<h3>Pending Principals</h3>
+{% for p in principals %}
+    <p>
+        {{ p.username }} - {{ p.college }}
+        <a href="/admin/approve/{{ p.id }}">Approve</a>
+    </p>
+{% else %}
+    <p>No pending principals</p>
+{% endfor %}
+
+<h3>Pending Guardians</h3>
+{% for g in guardians %}
+    <p>
+        {{ g.username }}
+        <a href="/admin/approve/{{ g.id }}">Approve</a>
+    </p>
+{% else %}
+    <p>No pending guardians</p>
+{% endfor %}
+
+<a href="/logout">Logout</a>

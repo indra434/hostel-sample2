@@ -1,0 +1,37 @@
+<h2>Principal Dashboard ({{ session.college }})</h2>
+
+<h3>Pending Student / Warden Approvals</h3>
+
+{% for u in students %}
+<p>
+    {{ u.username }} ({{ u.role }})<br>
+
+    {% if u.id_card %}
+        <a href="/static/uploads/{{ u.id_card }}" target="_blank">
+            View ID Card
+        </a><br>
+    {% endif %}
+
+   <a href="/principal/approve_user/{{ u.id }}">Approve</a> |
+<a href="/principal/reject_user/{{ u.id }}"
+   onclick="return confirm('Reject this user?')">
+   Reject
+</a>
+</p>
+<hr>
+{% else %}
+<p>No pending users</p>
+{% endfor %}
+
+<h3>Hostel Applications</h3>
+
+{% for a in apps %}
+<p>
+    {{ a.username }} → {{ a.name }}
+    <a href="/principal/approve_hostel/{{ a.id }}">Approve</a>
+</p>
+{% else %}
+<p>No hostel applications</p>
+{% endfor %}
+
+<a href="/logout">Logout</a>

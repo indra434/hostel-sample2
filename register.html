@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ role.capitalize() }} Registration</title>
+    <style>
+        body { font-family: Arial; padding: 50px; max-width: 400px; margin: auto; background: #f4f4f4; }
+        input, button { width: 100%; padding: 12px; margin: 10px 0; }
+        button { background: #2196F3; color: white; border: none; cursor: pointer; }
+        .flash { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #f8d7da; color: #721c24; }
+        .success { background: #d4edda; color: #155724; }
+    </style>
+</head>
+<body>
+<h2>{{ role.capitalize() }} Registration</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash {{category}}">{{message}}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<form method="POST">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    {% if role in ['student', 'principal'] %}
+    <input type="text" name="college" placeholder="College" required>
+    {% endif %}
+    <button>Register</button>
+</form>
+
+<p><a href="{{ url_for('login') }}">Back to Login</a></p>
+</body>
+</html>

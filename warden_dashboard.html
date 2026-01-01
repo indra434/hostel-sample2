@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Warden Dashboard</title>
+</head>
+<body>
+
+<h2>Warden Dashboard</h2>
+
+<!-- ADD HOSTEL -->
+<h3>Add Hostel</h3>
+<form method="POST" action="/warden/add_hostel">
+    <input name="hostel_name" placeholder="Hostel Name" required>
+    <input type="number" name="total_rooms" placeholder="Total Rooms" required>
+    <button>Add Hostel</button>
+</form>
+
+<hr>
+
+<!-- SHOW ROOMS -->
+<h3>Rooms</h3>
+{% for r in rooms %}
+    <p>{{ r.hostel_name }} - Room {{ r.room_number }}</p>
+{% else %}
+    <p>No rooms added yet</p>
+{% endfor %}
+
+<hr>
+
+<!-- MARK ATTENDANCE -->
+<h3>Mark Student Attendance</h3>
+<form method="POST" action="/warden/attendance">
+    <select name="student_id" required>
+        {% for s in students %}
+        <option value="{{ s.id }}">{{ s.username }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="date" name="date" required>
+
+    <select name="status">
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+    </select>
+
+    <button>Submit Attendance</button>
+</form>
+
+<hr>
+
+<!-- ATTENDANCE RECORD -->
+<h3>Attendance Records</h3>
+{% for a in attendance %}
+    <p>{{ a.username }} | {{ a.date }} | {{ a.status }}</p>
+{% else %}
+    <p>No attendance taken</p>
+{% endfor %}
+
+<hr>
+
+<!-- UPLOAD ROOM PHOTO -->
+<h3>Upload Room Photo</h3>
+<form method="POST" action="/warden/photo" enctype="multipart/form-data">
+    <select name="hostel_id" required>
+        {% for h in hostels %}
+        <option value="{{ h.id }}">{{ h.name }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="file" name="photo" required>
+    <button>Upload</button>
+</form>
+
+<hr>
+
+<!-- SHOW PHOTOS -->
+<h3>Uploaded Room Photos</h3>
+{% for p in photos %}
+    <img src="/static/uploads/{{ p.filename }}" width="150">
+{% else %}
+    <p>No photos uploaded</p>
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<h2>Student Dashboard</h2>
+
+<h3>Available Hostels</h3>
+{% for h in hostels %}
+    <p>
+        {{ h.name }}
+        <a href="/student/apply/{{ h.id }}">Apply</a>
+    </p>
+{% else %}
+    <p>No hostels available</p>
+{% endfor %}
+
+<hr>
+
+<h3>Room Photos</h3>
+{% for p in photos %}
+    <img src="/static/uploads/{{ p.filename }}" width="200">
+{% else %}
+    <p>No photos yet</p>
+{% endfor %}
+
+<a href="/logout">Logout</a>

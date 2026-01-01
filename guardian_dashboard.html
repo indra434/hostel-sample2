@@ -1,0 +1,9 @@
+<h2>Welcome Guardian</h2>
+<a href="/logout">Logout</a>
+
+<h3>Student Attendance</h3>
+{% for a in attendance %}
+<p>{{a.username}} - {{a.date}} - {{a.status}}</p>
+{% else %}
+<p>No attendance records.</p>
+{% endfor %}
